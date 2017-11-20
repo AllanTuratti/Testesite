@@ -25,7 +25,7 @@ SECRET_KEY = 'fv$s0od+^vue4(56$#4v5yg5vt2kqd%4%d*44d84)i$=ctiigg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
