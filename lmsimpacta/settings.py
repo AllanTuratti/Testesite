@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+mysqlconndstr = os.environ['MYSQLCONNSTR_localdb']
+mysqlconndlst = mysqlconndstr.split(';')
+mysqlconndict = dict(s.plit('=', 1)for s in mysqlconnlst)
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,7 +29,7 @@ SECRET_KEY = 'fv$s0od+^vue4(56$#4v5yg5vt2kqd%4%d*44d84)i$=ctiigg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [ '*' ]
 
 
 # Application definition
@@ -68,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'SiteLmsimpacta.wsgi.application'
+WSGI_APPLICATION = 'lmsimpacta.wsgi.application'
 
 
 # Database
@@ -76,11 +80,12 @@ WSGI_APPLICATION = 'SiteLmsimpacta.wsgi.application'
 DATABASES = {
         'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'django_data',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1', # Or an IP Address that your DB is hosted on
-        'PORT': '3306'
+        'NAME': mysqlconndict['Database'],
+        'USER': mysqlconndict['User id'],
+        'PASSWORD': mysqlconndict['Password'],
+        'HOST': mysqlconndict['Data Source'].split(':')[0],
+        'PORT': mysqlconndict['Data Source'].split(':')[1],
+        
     }
 }
 
