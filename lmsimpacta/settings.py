@@ -12,9 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
-mysqlconndstr = os.environ['MYSQLCONNSTR_localdb']
-mysqlconndlst = mysqlconndstr.split(';')
-mysqlconndict = dict(s.plit('=', 1)for s in mysqlconnlst)
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -85,6 +83,9 @@ DATABASES = {
         'PASSWORD': mysqlconndict['Password'],
         'HOST': mysqlconndict['Data Source'].split(':')[0],
         'PORT': mysqlconndict['Data Source'].split(':')[1],
+        mysqlconndstr = os.environ['MYSQLCONNSTR_localdb']
+        mysqlconndlst = mysqlconndstr.split(';')
+        mysqlconndict = dict(s.plit('=', 1)for s in mysqlconnlst)
         
     }
 }
